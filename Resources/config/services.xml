@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+
+        <service id="sulu_pawwwloff_article.admin" class="Pawwwloff\Bundle\SuluArticleBundle\Admin\ArticleAdmin">
+            <argument type="service" id="sulu_admin.view_builder_factory"/>
+            <argument type="service" id="sulu_core.webspace.webspace_manager"/>
+            <argument type="service" id="sulu_security.security_checker"/>
+            <argument type="service" id="sulu_activity.activity_list_view_builder_factory"/>
+
+            <tag name="sulu.admin"/>
+            <tag name="sulu.context" context="admin"/>
+        </service>
+
+        <service id="sulu_pawwwloff_article.repository" class="Pawwwloff\Bundle\SuluArticleBundle\Repository\ArticleRepository"
+                 public="true" lazy="true">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
+            <argument type="service">
+                <service class="Doctrine\ORM\Mapping\ClassMetadata">
+                    <argument>Pawwwloff\Bundle\SuluArticleBundle\Entity\PawwwloffArticle</argument>
+                    <factory service="doctrine.orm.default_entity_manager" method="getClassMetadata"/>
+                </service>
+            </argument>
+        </service>
+    </services>
+</container>

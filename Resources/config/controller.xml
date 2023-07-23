@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<container xmlns="http://symfony.com/schema/dic/services"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+    <services>
+        <service id="sulu_pawwwloff_article.rest.controller" class="Pawwwloff\Bundle\SuluArticleBundle\Controller\Admin\ArticleController"
+                 public="true">
+            <argument type="service" id="fos_rest.view_handler.default"/>
+            <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="sulu_pawwwloff_article.repository"/>
+            <argument type="service" id="sulu_pawwwloff_article.service"/>
+            <argument type="service" id="sulu_pawwwloff_article.list.presentation"/>
+            <tag name="sulu.context" context="admin"/>
+        </service>
+
+        <service id="sulu_pawwwloff_article.controller" class="Pawwwloff\Bundle\SuluArticleBundle\Controller\ArticleWebsiteController" autowire="true"
+                 public="true">
+            <tag name="controller.service_arguments"/>
+            <tag name="container.service_subscriber"/>
+            <tag name="sulu.context" context="website"/>
+        </service>
+    </services>
+</container>
