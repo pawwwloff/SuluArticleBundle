@@ -69,7 +69,7 @@ class PawwwloffArticleAdmin extends Admin
     {
         $locales = $this->webspaceManager->getAllLocales();
 
-        // Configure news List View
+        // Configure article List View
         $listToolbarActions = [new ToolbarAction('sulu_admin.add'), new ToolbarAction('sulu_admin.delete')];
         $listView = $this->viewBuilderFactory->createListViewBuilder(self::BUNDLE_LIST_VIEW, '/pawwwloff_article/:locale')
             ->setResourceKey(PawwwloffArticle::RESOURCE_KEY)
@@ -98,7 +98,7 @@ class PawwwloffArticleAdmin extends Admin
             ->setParent(static::BUNDLE_ADD_FORM_VIEW);
         $viewCollection->add($addDetailsFormView);
 
-        // Configure news Edit View
+        // Configure article Edit View
         $editFormView = $this->viewBuilderFactory->createResourceTabViewBuilder(static::BUNDLE_EDIT_FORM_VIEW, '/pawwwloff_article/:locale/:id')
             ->setResourceKey(PawwwloffArticle::RESOURCE_KEY)
             ->setBackView(static::BUNDLE_LIST_VIEW)

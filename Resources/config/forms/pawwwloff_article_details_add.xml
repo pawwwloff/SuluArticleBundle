@@ -1,0 +1,154 @@
+<?xml version="1.0" ?>
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xmlns="http://schemas.sulu.io/template/template"
+      xmlns:xi="http://www.w3.org/2001/XInclude"
+      xsi:schemaLocation="http://schemas.sulu.io/template/template http://schemas.sulu.io/template/form-1.0.xsd"
+>
+    <key>pawwwloff_article_details_add</key>
+
+    <properties>
+        <property name="title" type="text_line" mandatory="true" colspan="6">
+            <meta>
+                <title>sulu_admin.title</title>
+            </meta>
+            <params>
+                <param name="headline" value="true"/>
+            </params>
+        </property>
+
+        <property name="publishedAt" type="datetime" mandatory="true" colspan="6">
+            <meta>
+                <title>sulu.pawwwloff.article.publishedAt</title>
+            </meta>
+        </property>
+
+        <section name="content">
+            <meta>
+                <title>Content</title>
+            </meta>
+            <properties>
+                <property name="header" type="single_media_selection">
+                    <meta>
+                        <title>sulu.pawwwloff.article.image</title>
+                    </meta>
+                    <params>
+                        <param name="types" value="image"/>
+                        <param name="image_size" value="800x400"/>
+                    </params>
+                </property>
+
+                <property name="teaser" type="text_area">
+                    <meta>
+                        <title>sulu.pawwwloff.article.teaser</title>
+                    </meta>
+                </property>
+
+                <block name="content" default-type="editor" minOccurs="0">
+                    <meta>
+                        <title>sulu.pawwwloff.article.content</title>
+                    </meta>
+                    <types>
+                        <type name="title">
+                            <meta>
+                                <title>sulu.pawwwloff.article.title</title>
+                            </meta>
+                            <properties>
+                                <property name="title" type="text_line" colspan="12">
+                                    <meta>
+                                        <title>sulu.pawwwloff.article.title</title>
+                                    </meta>
+                                </property>
+
+                                <property name="titleType" type="single_select" mandatory="true">
+                                    <meta>
+                                        <title>Type</title>
+                                    </meta>
+                                    <params>
+                                        <param name="default_value" value="h1"/>
+                                        <param name="values" type="collection">
+                                            <param name="h1">
+                                                <meta>
+                                                    <title>H1</title>
+                                                </meta>
+                                            </param>
+                                            <param name="h2">
+                                                <meta>
+                                                    <title>H2</title>
+                                                </meta>
+                                            </param>
+                                            <param name="h3">
+                                                <meta>
+                                                    <title>H3</title>
+                                                </meta>
+                                            </param>
+                                        </param>
+                                    </params>
+                                </property>
+
+
+                            </properties>
+                        </type>
+                        <type name="editor">
+                            <meta>
+                                <title>sulu.pawwwloff.article.editor</title>
+                            </meta>
+                            <properties>
+                                <property name="text" type="text_editor" colspan="12">
+                                    <meta>
+                                        <title>sulu.pawwwloff.article.editor</title>
+                                    </meta>
+                                </property>
+                            </properties>
+                        </type>
+                        <type name="image">
+                            <meta>
+                                <title lang="de">Bild</title>
+                                <title lang="en">Image</title>
+                            </meta>
+                            <properties>
+                                <property name="image" type="single_media_selection">
+                                    <meta>
+                                        <title>sulu.pawwwloff.article.image</title>
+                                    </meta>
+                                </property>
+                            </properties>
+                        </type>
+                        <type name="quote">
+                            <meta>
+                                <title>sulu.pawwwloff.article.quote</title>
+                            </meta>
+
+                            <properties>
+                                <property name="quote" type="text_area" mandatory="true">
+                                    <meta>
+                                        <title>sulu.pawwwloff.article.quote</title>
+                                    </meta>
+                                </property>
+
+                                <property name="quoteReference" type="text_line">
+                                    <meta>
+                                        <title lang="en">Reference</title>
+                                        <title lang="de">Referenz</title>
+                                    </meta>
+                                </property>
+                            </properties>
+                        </type>
+                    </types>
+                </block>
+            </properties>
+        </section>
+
+        <section name="tags">
+            <meta>
+                <title>Tags</title>
+            </meta>
+            <properties>
+                <property name="tags" type="tag_selection">
+                    <meta>
+                        <title>sulu.pawwwloff.article.tags</title>
+                    </meta>
+                </property>
+            </properties>
+        </section>
+    </properties>
+</form>

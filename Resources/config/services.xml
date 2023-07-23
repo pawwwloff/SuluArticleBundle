@@ -4,7 +4,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
 
-        <service id="sulu_pawwwloff_article.admin" class="Pawwwloff\Bundle\SuluArticleBundle\Admin\ArticleAdmin">
+        <service id="sulu_pawwwloff_article.admin" class="Pawwwloff\Bundle\SuluArticleBundle\Admin\PawwwloffArticleAdmin">
             <argument type="service" id="sulu_admin.view_builder_factory"/>
             <argument type="service" id="sulu_core.webspace.webspace_manager"/>
             <argument type="service" id="sulu_security.security_checker"/>
@@ -14,7 +14,7 @@
             <tag name="sulu.context" context="admin"/>
         </service>
 
-        <service id="sulu_pawwwloff_article.repository" class="Pawwwloff\Bundle\SuluArticleBundle\Repository\ArticleRepository"
+        <service id="sulu_pawwwloff_article.repository" class="Pawwwloff\Bundle\SuluArticleBundle\Repository\PawwwloffArticleRepository"
                  public="true" lazy="true">
             <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service">
@@ -23,6 +23,80 @@
                     <factory service="doctrine.orm.default_entity_manager" method="getClassMetadata"/>
                 </service>
             </argument>
+        </service>
+
+        <service id="sulu_pawwwloff_article.service" public="true" class="Pawwwloff\Bundle\SuluArticleBundle\Service\ArticleService">
+            <argument type="service" id="sulu_pawwwloff_article.repository"/>
+            <argument type="service" id="sulu_pawwwloff_article.article.factory"/>
+            <argument type="service" id="sulu_pawwwloff_article.route.factory"/>
+            <argument type="service" id="security.token_storage"/>
+            <argument type="service" id="sulu_activity.domain_event_collector"/>
+
+            <tag name="sulu.context" context="admin"/>
+        </service>
+
+        <service id="sulu_pawwwloff_article.article.factory" public="true"
+                 class="Pawwwloff\Bundle\SuluArticleBundle\Entity\Factory\ArticleFactory">
+            <argument type="service" id="sulu_pawwwloff_article.media.factory"/>
+            <argument type="service" id="sulu_pawwwloff_article.tag.factory"/>
+            <argument type="service" id="sulu.repository.contact"/>
+            <tag name="sulu.context" context="admin"/>
+        </service>
+
+        <service id="sulu_pawwwloff_article.tag.factory" public="true"
+                 class="Pawwwloff\Bundle\SuluArticleBundle\Entity\Factory\TagFactory">
+            <argument type="service" id="sulu_tag.tag_manager"/>
+
+            <tag name="sulu.context" context="admin"/>
+        </service>
+
+        <service id="sulu_pawwwloff_article.route.factory" public="true" class="Pawwwloff\Bundle\SuluArticleBundle\Entity\Factory\ArticleRouteFactory">
+            <argument type="service" id="sulu_route.manager.route_manager"/>
+        </service>
+
+        <service id="sulu_pawwwloff_article.media.factory" public="true"
+                 class="Pawwwloff\Bundle\SuluArticleBundle\Entity\Factory\MediaFactory">
+            <argument type="service" id="sulu.repository.media"/>
+
+            <tag name="sulu.context" context="admin"/>
+        </service>
+
+        <service id="sulu_pawwwloff_article.list.presentation" public="true"
+                 class="Pawwwloff\Bundle\SuluArticleBundle\Admin\DoctrineListRepresentationFactory">
+            <argument type="service" id="sulu_core.rest_helper"/>
+            <argument type="service" id="sulu_core.doctrine_list_builder_factory"/>
+            <argument type="service" id="sulu_core.list_builder.field_descriptor_factory"/>
+            <argument type="service" id="sulu_media.media_manager"/>
+
+            <tag name="sulu.context" context="admin"/>
+        </service>
+
+        <service id="sulu_pawwwloff_article.object_provider" public="true" class="Pawwwloff\Bundle\SuluArticleBundle\Preview\PawwwloffArticleObjectProvider">
+            <argument type="service" id="sulu_pawwwloff_article.repository"/>
+            <tag name="sulu_preview.object_provider" provider-key="pawwwloff_article"/>
+        </service>
+
+        <service id="sulu_pawwwloff_article.routing_provider" public="true" class="Pawwwloff\Bundle\SuluArticleBundle\Routing\PawwwloffArticleRouteDefaultProvider">
+            <argument type="service" id="sulu_pawwwloff_article.repository"/>
+            <tag name="sulu_route.defaults_provider"/>
+        </service>
+
+        <service id="sulu_pawwwloff_article.content.type.pawwwloff_article_selection" class="Pawwwloff\Bundle\SuluArticleBundle\Content\ArticleSelectionContentType">
+            <tag name="sulu.content.type" alias="pawwwloff_article_selection"/>
+            <tag name="sulu.content.export" format="1.2.xliff" translate="false" />
+            <argument type="service" id="sulu_pawwwloff_article.repository"/>
+        </service>
+
+        <service id="sulu_contact.twig" class="Pawwwloff\Bundle\SuluArticleBundle\Twig\ArticleTwigExtension">
+            <argument type="service" id="sulu_pawwwloff_article.repository"/>
+            <tag name="twig.extension"/>
+        </service>
+
+        <service id="sulu_pawwwloff_article.smart.content" public="true"
+                 class="Pawwwloff\Bundle\SuluArticleBundle\Content\ArticleDataProvider">
+            <tag name="sulu.smart_content.data_provider" alias="pawwwloff_articles"/>
+            <argument type="service" id="sulu_pawwwloff_article.repository"/>
+            <argument type="service" id="sulu_core.array_serializer"/>
         </service>
     </services>
 </container>
