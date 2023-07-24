@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Pawwwloff\Bundle\SuluArticleBundle\Controller;
 
+use FOS\RestBundle\Controller\Annotations as Rest;
 use Sulu\Bundle\PreviewBundle\Preview\Preview;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;

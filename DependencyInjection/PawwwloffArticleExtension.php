@@ -132,11 +132,11 @@ class PawwwloffArticleExtension extends Extension implements PrependExtensionInt
             ['templates' => ['view' => 'pawwwloff/article/index.html.twig']]
         );
 
-//        $container->loadFromExtension('framework', [
-//            'default_locale' => 'en',
-//            'translator' => ['paths' => [__DIR__ . '/../Resources/config/translations/']],
-//            // ...
-//        ]);
+        $container->loadFromExtension('framework', [
+            'default_locale' => 'en',
+            'translator' => ['paths' => [__DIR__ . '/../Resources/config/translations/']],
+            // ...
+        ]);
     }
 
     public function load(array $configs, ContainerBuilder $container): void

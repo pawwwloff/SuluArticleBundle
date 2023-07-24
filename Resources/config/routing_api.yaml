@@ -1,0 +1,9 @@
+article_list:
+  path: /api/articles
+  # the controller value has the format 'controller_class::method_name'
+  controller: Pawwwloff\Bundle\SuluArticleBundle\Controller\Api\ArticleController::articles
+
+article_template:
+  path: /api/articles/template
+  # the controller value has the format 'controller_class::method_name'
+  controller: Pawwwloff\Bundle\SuluArticleBundle\Controller\Api\ArticleController::articlesTemplate

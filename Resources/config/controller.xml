@@ -13,6 +13,16 @@
             <tag name="sulu.context" context="admin"/>
         </service>
 
+        <service id="sulu_pawwwloff_article.api.controller" class="Pawwwloff\Bundle\SuluArticleBundle\Controller\Api\ArticleController" autowire="true"
+                 public="true" autoconfigure="true">
+            <argument type="service" id="sulu_pawwwloff_article.repository"/>
+            <argument type="service" id="sulu_pawwwloff_article.service"/>
+            <argument type="service" id="sulu_pawwwloff_article.list.presentation"/>
+            <tag name="controller.service_arguments"/>
+            <tag name="container.service_subscriber"/>
+            <tag name="sulu.context" context="website"/>
+        </service>
+
         <service id="sulu_pawwwloff_article.controller" class="Pawwwloff\Bundle\SuluArticleBundle\Controller\PawwwloffArticleWebsiteController" autowire="true"
                  public="true">
             <tag name="controller.service_arguments"/>

@@ -57,6 +57,15 @@ sulu_pawwwloff_article.admin:
   name_prefix: app.
 ```
 
+Define the Api Route in `routes_website.yaml`
+```yaml
+sulu_pawwwloff_article.api:
+  type: rest
+  resource: sulu_pawwwloff_article.api.controller
+  prefix: /api
+  name_prefix: pawww.
+```
+
 ## Role Permissions
 If this bundle is being added to a previous Sulu installation, you will need to manually add the permissions to your admin user role(s) under the `Settings > User roles` menu option.
 

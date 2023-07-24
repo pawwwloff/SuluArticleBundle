@@ -41,7 +41,6 @@ class DoctrineListRepresentationFactory
     ): PaginatedRepresentation {
         /** @var DoctrineFieldDescriptor[] $fieldDescriptors */
         $fieldDescriptors = $this->fieldDescriptorFactory->getFieldDescriptors($resourceKey);
-
         $listBuilder = $this->listBuilderFactory->create($fieldDescriptors['id']->getEntityName());
 
         $this->restHelper->initializeListBuilder($listBuilder, $fieldDescriptors);

@@ -29,10 +29,9 @@
             <argument type="service" id="sulu_pawwwloff_article.repository"/>
             <argument type="service" id="sulu_pawwwloff_article.article.factory"/>
             <argument type="service" id="sulu_pawwwloff_article.route.factory"/>
+            <argument type="service" id="sulu_core.array_serializer"/>
             <argument type="service" id="security.token_storage"/>
             <argument type="service" id="sulu_activity.domain_event_collector"/>
-
-            <tag name="sulu.context" context="admin"/>
         </service>
 
         <service id="sulu_pawwwloff_article.article.factory" public="true"
@@ -40,14 +39,11 @@
             <argument type="service" id="sulu_pawwwloff_article.media.factory"/>
             <argument type="service" id="sulu_pawwwloff_article.tag.factory"/>
             <argument type="service" id="sulu.repository.contact"/>
-            <tag name="sulu.context" context="admin"/>
         </service>
 
         <service id="sulu_pawwwloff_article.tag.factory" public="true"
                  class="Pawwwloff\Bundle\SuluArticleBundle\Entity\Factory\TagFactory">
             <argument type="service" id="sulu_tag.tag_manager"/>
-
-            <tag name="sulu.context" context="admin"/>
         </service>
 
         <service id="sulu_pawwwloff_article.route.factory" public="true" class="Pawwwloff\Bundle\SuluArticleBundle\Entity\Factory\ArticleRouteFactory">
@@ -57,8 +53,6 @@
         <service id="sulu_pawwwloff_article.media.factory" public="true"
                  class="Pawwwloff\Bundle\SuluArticleBundle\Entity\Factory\MediaFactory">
             <argument type="service" id="sulu.repository.media"/>
-
-            <tag name="sulu.context" context="admin"/>
         </service>
 
         <service id="sulu_pawwwloff_article.list.presentation" public="true"
@@ -67,8 +61,6 @@
             <argument type="service" id="sulu_core.doctrine_list_builder_factory"/>
             <argument type="service" id="sulu_core.list_builder.field_descriptor_factory"/>
             <argument type="service" id="sulu_media.media_manager"/>
-
-            <tag name="sulu.context" context="admin"/>
         </service>
 
         <service id="sulu_pawwwloff_article.object_provider" public="true" class="Pawwwloff\Bundle\SuluArticleBundle\Preview\PawwwloffArticleObjectProvider">

@@ -22,17 +22,27 @@ use Sulu\Bundle\RouteBundle\Model\RoutableInterface;
 use Sulu\Bundle\RouteBundle\Model\RouteInterface;
 use Sulu\Bundle\TagBundle\Tag\TagInterface;
 use Sulu\Component\Persistence\Model\AuditableInterface;
+//use JMS\Serializer\Annotation\Groups;
+//use JMS\Serializer\Annotation\SerializedName;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
 
 class PawwwloffArticle implements PawwwloffArticleInterface, AuditableInterface, RoutableInterface
 {
     final public const RESOURCE_KEY = 'pawwwloff_article';
 
     /**
+     * @return int|null
+     *
+     * @SerializedName("tags")
+     * @Groups({"fullPawwwloffArticle"})
+     */
+    private ?int $id = null;
+
+    /**
      * @Accessor(getter="getTagNameArray")
      */
     protected $tags;
-
-    private ?int $id = null;
 
     /**
      * @var MediaInterface
@@ -83,6 +93,12 @@ class PawwwloffArticle implements PawwwloffArticleInterface, AuditableInterface,
         $this->tags = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     *
+     * @SerializedName("id")
+     * @Groups({"fullPawwwloffArticle"})
+     */
     public function getId(): ?int
     {
         return $this->id;
@@ -187,6 +203,13 @@ class PawwwloffArticle implements PawwwloffArticleInterface, AuditableInterface,
         $this->tags->removeElement($tag);
     }
 
+    /**
+     * @return int|null
+     *
+     * @SerializedName("tags")
+     * @Groups({"fullPawwwloffArticle"})
+     */
+    #[Groups(['fullPawwwloffArticle'])]
     public function getTags(): Collection
     {
         return $this->tags;
