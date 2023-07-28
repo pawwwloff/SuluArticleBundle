@@ -24,7 +24,7 @@ class ArticleFactory extends AbstractFactory implements ArticleFactoryInterface
     /**
      * ArticleFactory constructor.
      */
-    public function __construct(private readonly MediaFactoryInterface $mediaFactory, private readonly TagFactoryInterface $tagFactory, private readonly ContactRepositoryInterface $contactRepository)
+    public function __construct(private readonly MediaFactoryInterface $mediaFactory, private readonly TagFactoryInterface $tagFactory, private readonly CategoryFactoryInterface $categoryFactory, private readonly ContactRepositoryInterface $contactRepository)
     {
     }
 
@@ -61,6 +61,10 @@ class ArticleFactory extends AbstractFactory implements ArticleFactoryInterface
 
         if ($tags = $this->getProperty($data, 'tags')) {
             $this->tagFactory->processTags($article, $tags);
+        }
+
+        if ($categories = $this->getProperty($data, 'categories')) {
+            $this->categoryFactory->processCategories($article, $categories);
         }
 
         if (!$article->getId()) {

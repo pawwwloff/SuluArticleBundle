@@ -17,6 +17,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\VirtualProperty;
+use Sulu\Bundle\CategoryBundle\Api\Category;
 use Sulu\Component\Rest\ApiWrapper;
 use Pawwwloff\Bundle\SuluArticleBundle\Entity\PawwwloffArticle as ArticleEntity;
 
@@ -219,5 +220,21 @@ class PawwwloffArticle extends ApiWrapper
         $seo['seo'] = $this->getEntity()->getSeo();
 
         return $seo;
+    }
+
+    /**
+     * Get categories.
+     *
+     * @return Category[]
+     *
+     * @VirtualProperty
+     * @SerializedName("categories")
+     * @Groups({"fullPawwwloffArticle"})
+     */
+    public function getCategories()
+    {
+        return \array_map(function($category) {
+            return $category->getId();
+        }, $this->entity?->getCategories()->toArray());
     }
 }

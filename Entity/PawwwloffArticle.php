@@ -17,6 +17,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use JMS\Serializer\Annotation\Accessor;
+use Sulu\Bundle\CategoryBundle\Entity\CategoryInterface;
 use Sulu\Bundle\MediaBundle\Entity\MediaInterface;
 use Sulu\Bundle\RouteBundle\Model\RoutableInterface;
 use Sulu\Bundle\RouteBundle\Model\RouteInterface;
@@ -43,6 +44,11 @@ class PawwwloffArticle implements PawwwloffArticleInterface, AuditableInterface,
      * @Accessor(getter="getTagNameArray")
      */
     protected $tags;
+
+    /**
+     * @var Collection<int, CategoryInterface>
+     */
+    protected $categories;
 
     /**
      * @var MediaInterface
@@ -91,6 +97,7 @@ class PawwwloffArticle implements PawwwloffArticleInterface, AuditableInterface,
     public function __construct()
     {
         $this->tags = new ArrayCollection();
+        $this->categories = new ArrayCollection();
     }
 
     /**
@@ -292,5 +299,22 @@ class PawwwloffArticle implements PawwwloffArticleInterface, AuditableInterface,
     public function setSeo($seo): void
     {
         $this->seo = $seo;
+    }
+
+    public function addCategory(CategoryInterface $category): static
+    {
+        $this->categories[] = $category;
+
+        return $this;
+    }
+
+    public function removeCategory(CategoryInterface $category): void
+    {
+        $this->categories->removeElement($category);
+    }
+
+    public function getCategories(): Collection
+    {
+        return $this->categories;
     }
 }

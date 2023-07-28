@@ -59,13 +59,14 @@ class PawwwloffArticleExtension extends Extension implements PrependExtensionInt
         }
 
         if ($container->hasExtension('sulu_route')) {
+            $path = '/' . (getenv('PAWWWLOFF_ARTICLE_PATH') ?:'pawwwloff_article') . '/{object.getId()}';
             $container->prependExtensionConfig(
                 'sulu_route',
                 [
                     'mappings' => [
                         PawwwloffArticle::class => [
                             'generator' => 'schema',
-                            'options' => ['route_schema' => '/pawwwloff_article/{object.getId()}'],
+                            'options' => ['route_schema' => $path],
                             'resource_key' => PawwwloffArticle::RESOURCE_KEY,
                         ],
                     ],

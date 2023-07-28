@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Pawwwloff\Bundle\SuluArticleBundle\Twig;
 
+use Doctrine\ORM\EntityManagerInterface;
 use Pawwwloff\Bundle\SuluArticleBundle\Entity\PawwwloffArticle;
 use Pawwwloff\Bundle\SuluArticleBundle\Repository\PawwwloffArticleRepository;
 use Twig\Extension\AbstractExtension;
@@ -24,6 +25,7 @@ use Twig\TwigFunction;
 class ArticleTwigExtension extends AbstractExtension
 {
     public function __construct(
+        private readonly EntityManagerInterface $em,
         private readonly PawwwloffArticleRepository $articleRepository
     ) {
     }
@@ -32,6 +34,8 @@ class ArticleTwigExtension extends AbstractExtension
     {
         return [
             new TwigFunction('sulu_resolve_pawwwloff_article', [$this, 'resolveArticleFunction']),
+            new TwigFunction('get_pawwwloff_articles_tags', [$this, 'getActiveArticlesTags']),
+            new TwigFunction('get_pawwwloff_articles_categories', [$this, 'getActiveArticlesCategories']),
         ];
     }
 
@@ -42,17 +46,38 @@ class ArticleTwigExtension extends AbstractExtension
         return $article ?? null;
     }
 
-    public function resolveArticlesByFiltersFunction(array $filters, int $page, int $pageSize): ?PawwwloffArticle
+    public function getActiveArticlesTags()
     {
-        $article = $this->articleRepository->findByFilters($filters, $page, $pageSize);
+        $sql = <<<SQL
+            SELECT t.id, t.name, count(*) as count
+            FROM ta_tags t
+            INNER JOIN pawwwloff_articles_tags nt ON nt.idTags = t.id
+            INNER JOIN su_pawwwloff_article n ON n.id = nt.article_id
+            WHERE n.enabled = true
+            AND n.publishedAt <= CURRENT_DATE()
+            GROUP BY t.id, t.name;
+        SQL;
 
-        return $article ?? null;
+        $tags = $this->em->getConnection()->executeQuery($sql)->fetchAllAssociative();
+
+        return $tags;
     }
 
-    public function resolveArticlePaginationInfoFunction(int $id): ?PawwwloffArticle
+    public function getActiveArticlesCategories()
     {
-        $article = $this->articleRepository->find($id);
+        $sql = <<<SQL
+            SELECT t.idCategories as id, t.translation as name, count(*) as count
+            FROM ca_category_translations t
+            INNER JOIN pawwwloff_article_categories nt ON nt.idCategories = t.idCategories
+            INNER JOIN su_pawwwloff_article n ON n.id = nt.article_id
+            WHERE n.enabled = true
+            AND n.publishedAt <= CURRENT_DATE()
+            AND t.locale = 'en'
+            GROUP BY t.id, t.translation;
+        SQL;
 
-        return $article ?? null;
+        $categories = $this->em->getConnection()->executeQuery($sql)->fetchAllAssociative();
+
+        return $categories;
     }
 }

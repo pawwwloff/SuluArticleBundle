@@ -1,20 +1,20 @@
 {
-    "sulu.pawwwloff.article": "Hawex news",
+    "sulu.pawwwloff.article": "Articles",
     "sulu.pawwwloff.article.image": "Image",
-    "sulu.pawwwloff.article.header": "News Header",
+    "sulu.pawwwloff.article.header": "Article Header",
     "sulu.pawwwloff.article.publishedAt": "Published at",
     "sulu.pawwwloff.article.teaser": "Teaser",
     "sulu.pawwwloff.article.tags": "Tags",
     "sulu.pawwwloff.article.content": "Content",
     "sulu_audience_targeting.target_groups": "Target Group",
-    "sulu.pawwwloff.article.enable_news": "Enable",
+    "sulu.pawwwloff.article.enable_article": "Enable",
     "sulu.pawwwloff.article.route": "Route",
-    "sulu_activity.description.news.created": "{userFullName} has created the News \"{resourceTitle}\"",
-    "sulu_activity.description.news.modified": "{userFullName} has modified the News \"{resourceTitle}\"",
-    "sulu_activity.description.news.removed": "{userFullName} has removed the News \"{resourceTitle}\"",
-    "sulu_activity.resource.news": "News",
+    "sulu_activity.description.pawwwloff_article.created": "{userFullName} has created the Article \"{resourceTitle}\"",
+    "sulu_activity.description.pawwwloff_article.modified": "{userFullName} has modified the Article \"{resourceTitle}\"",
+    "sulu_activity.description.pawwwloff_article.removed": "{userFullName} has removed the Article \"{resourceTitle}\"",
+    "sulu_activity.resource.pawwwloff_article": "Article",
     "sulu.pawwwloff.article.quote": "Quote",
     "sulu.pawwwloff.article.editor": "Editor",
     "sulu.pawwwloff.article.title": "Title",
-    "sulu_havex_news.news_select": "Select news"
+    "sulu_pawwwloff_articles.article_select": "Select articles"
 }

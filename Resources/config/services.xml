@@ -38,12 +38,19 @@
                  class="Pawwwloff\Bundle\SuluArticleBundle\Entity\Factory\ArticleFactory">
             <argument type="service" id="sulu_pawwwloff_article.media.factory"/>
             <argument type="service" id="sulu_pawwwloff_article.tag.factory"/>
+            <argument type="service" id="sulu_pawwwloff_article.category.factory"/>
             <argument type="service" id="sulu.repository.contact"/>
         </service>
 
         <service id="sulu_pawwwloff_article.tag.factory" public="true"
                  class="Pawwwloff\Bundle\SuluArticleBundle\Entity\Factory\TagFactory">
             <argument type="service" id="sulu_tag.tag_manager"/>
+        </service>
+
+
+        <service id="sulu_pawwwloff_article.category.factory" public="true"
+                 class="Pawwwloff\Bundle\SuluArticleBundle\Entity\Factory\CategoryFactory">
+            <argument type="service" id="sulu_category.category_manager"/>
         </service>
 
         <service id="sulu_pawwwloff_article.route.factory" public="true" class="Pawwwloff\Bundle\SuluArticleBundle\Entity\Factory\ArticleRouteFactory">
@@ -79,7 +86,8 @@
             <argument type="service" id="sulu_pawwwloff_article.repository"/>
         </service>
 
-        <service id="sulu_contact.twig" class="Pawwwloff\Bundle\SuluArticleBundle\Twig\ArticleTwigExtension">
+        <service id="pawwwloff_articles.twig" class="Pawwwloff\Bundle\SuluArticleBundle\Twig\ArticleTwigExtension">
+            <argument type="service" id="doctrine.orm.default_entity_manager"/>
             <argument type="service" id="sulu_pawwwloff_article.repository"/>
             <tag name="twig.extension"/>
         </service>

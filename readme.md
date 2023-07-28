@@ -162,3 +162,21 @@ Returns:
 
     object - Object with all needed properties, like title
 
+#### Filters
+```php
+By tags /path?tags=1,2,3
+By categories /path?categories=1,2,3
+```
+
+Returns active articles tags.
+
+ ```php
+{% set tags = get_pawwwloff_articles_tags() %}
+ ```
+
+Returns active articles categories.
+
+ ```php
+{% set categories = get_pawwwloff_articles_categories() %}
+ ```
+

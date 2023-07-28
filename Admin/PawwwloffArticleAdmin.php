@@ -151,7 +151,7 @@ class PawwwloffArticleAdmin extends Admin
         $viewCollection->add(
             $test->disablePreviewWebspaceChooser()
                 ->setResourceKey(PawwwloffArticle::RESOURCE_KEY)
-                ->setFormKey('article_seo')
+                ->setFormKey('pawwwloff_article_seo')
                 ->setTabTitle('sulu_page.seo')
                 ->addToolbarActions($formToolbarActions)
                 ->setTitleVisible(true)

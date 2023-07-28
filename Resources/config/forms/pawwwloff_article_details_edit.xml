@@ -152,5 +152,18 @@
                 </property>
             </properties>
         </section>
+
+        <section name="categories">
+            <meta>
+                <title>Categories</title>
+            </meta>
+            <properties>
+                <property name="categories" type="category_selection">
+                    <meta>
+                        <title>sulu_category.categories</title>
+                    </meta>
+                </property>
+            </properties>
+        </section>
     </properties>
 </form>
