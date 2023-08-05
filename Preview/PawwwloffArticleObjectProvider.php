@@ -13,6 +13,7 @@ declare(strict_types=1);
 
 namespace Pawwwloff\Bundle\SuluArticleBundle\Preview;
 
+use Pawwwloff\Bundle\SuluArticleBundle\Entity\Factory\ArticleFactory;
 use Sulu\Bundle\PreviewBundle\Preview\Object\PreviewObjectProviderInterface;
 use Pawwwloff\Bundle\SuluArticleBundle\Admin\PawwwloffArticleAdmin;
 use Pawwwloff\Bundle\SuluArticleBundle\Entity\PawwwloffArticle;
@@ -20,7 +21,7 @@ use Pawwwloff\Bundle\SuluArticleBundle\Repository\PawwwloffArticleRepository;
 
 class PawwwloffArticleObjectProvider implements PreviewObjectProviderInterface
 {
-    public function __construct(private readonly PawwwloffArticleRepository $articleRepository)
+    public function __construct(private readonly PawwwloffArticleRepository $articleRepository, private readonly ArticleFactory $articleFactory)
     {
     }
 
@@ -36,24 +37,7 @@ class PawwwloffArticleObjectProvider implements PreviewObjectProviderInterface
 
     public function setValues($object, $locale, array $data): void
     {
-        $changedProperties = [
-            'content',
-            'title',
-            'teaser',
-            'tags',
-            'categories',
-            'enabled',
-            'header'
-        ];
-        foreach ($data as $property => $value) {
-            if (in_array($property, $changedProperties)) {
-                $rp = new \ReflectionProperty($object, $property);
-                $isAccessible = $rp->isPublic();
-                if(!$isAccessible) $rp->setAccessible(true);
-                $rp->setValue($object, $value);
-                if(!$isAccessible) $rp->setAccessible(false);
-            }
-        }
+        $this->articleFactory->generateArticleFromRequest($object, $data, $locale);
     }
 
     public function setContext($object, $locale, array $context): PawwwloffArticle

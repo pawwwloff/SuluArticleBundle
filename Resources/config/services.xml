@@ -72,6 +72,7 @@
 
         <service id="sulu_pawwwloff_article.object_provider" public="true" class="Pawwwloff\Bundle\SuluArticleBundle\Preview\PawwwloffArticleObjectProvider">
             <argument type="service" id="sulu_pawwwloff_article.repository"/>
+            <argument type="service" id="sulu_pawwwloff_article.article.factory"/>
             <tag name="sulu_preview.object_provider" provider-key="pawwwloff_article"/>
         </service>
 
