@@ -36,7 +36,24 @@ class PawwwloffArticleObjectProvider implements PreviewObjectProviderInterface
 
     public function setValues($object, $locale, array $data): void
     {
-        // TODO: Implement setValues() method.
+        $changedProperties = [
+            'content',
+            'title',
+            'teaser',
+            'tags',
+            'categories',
+            'enabled',
+            'header'
+        ];
+        foreach ($data as $property => $value) {
+            if (in_array($property, $changedProperties)) {
+                $rp = new \ReflectionProperty($object, $property);
+                $isAccessible = $rp->isPublic();
+                if(!$isAccessible) $rp->setAccessible(true);
+                $rp->setValue($object, $value);
+                if(!$isAccessible) $rp->setAccessible(false);
+            }
+        }
     }
 
     public function setContext($object, $locale, array $context): PawwwloffArticle
